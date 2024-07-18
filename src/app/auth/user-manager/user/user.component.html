@@ -1,0 +1,40 @@
+<div *ngIf="users.length === 0; else userList">
+  <div class="alert alert-warning m-4">No hay registros en el sistema!</div>
+</div>
+
+<ng-template #userList>
+  <div class="container-fluid px-3">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Zona</th>
+            <th colspan="2" class="text-end text-nowrap">
+              <span class="me-4">Eliminar</span>
+              <span>Actualizar</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; trackBy: trackById">
+            <td>{{ user.name }}</td>
+            <td>{{ user.lastname }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.zone }}</td>
+            <td colspan="2" class="text-end text-nowrap">
+              <button class="btn btn-danger btn-sm me-3" (click)="onRemoveUser(user.id)">
+                Eliminar
+              </button>
+              <button class="btn btn-info btn-sm" (click)="onSelectedUser(user)">
+                Actualizar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-template>
